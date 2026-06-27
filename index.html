@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<!-- saved from url=(0068)file:///Users/nakazawahinako/Downloads/otano-revenue-calculator.html -->
+<!-- saved from url=(0070)file:///Users/nakazawahinako/Downloads/otano-revenue-calculator_1.html -->
 <html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OtanO | 収益計算ページ</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Yu Gothic',sans-serif;background:#f9f7f4;color:#1a1a1a;min-height:100vh;padding:2rem 1rem}
@@ -54,9 +55,9 @@ footer{margin-top:2rem;text-align:center;font-size:11px;color:#ccc;letter-spacin
 <div class="sec-label">サマリー</div>
 <div class="grid4">
   <div class="metric"><div class="m-label">売上合計</div><div class="m-val" id="s-rev">¥3,900,000</div></div>
-  <div class="metric"><div class="m-label">総コスト</div><div class="m-val" id="s-cost">¥2,028,100</div></div>
-  <div class="metric"><div class="m-label">手残り</div><div class="m-val pos" id="s-profit">¥1,871,900</div></div>
-  <div class="metric"><div class="m-label">利益率</div><div class="m-val" id="s-margin">48%</div></div>
+  <div class="metric"><div class="m-label">総コスト</div><div class="m-val" id="s-cost">¥2,039,100</div></div>
+  <div class="metric"><div class="m-label">手残り</div><div class="m-val pos" id="s-profit">¥1,860,900</div></div>
+  <div class="metric"><div class="m-label">利益率</div><div class="m-val" id="s-margin">47.7%</div></div>
 </div>
 
 <div class="grid2">
@@ -95,8 +96,8 @@ footer{margin-top:2rem;text-align:center;font-size:11px;color:#ccc;letter-spacin
       <div class="f-input"><input type="number" id="i-cc" value="4" min="0" max="20" oninput="calc()"><span class="f-unit">%</span></div>
     </div>
     <div class="field-row">
-      <span class="f-label">宣伝費（%）</span>
-      <div class="f-input"><input type="number" id="i-ad" value="1" min="0" max="30" oninput="calc()"><span class="f-unit">%</span></div>
+      <span class="f-label">宣伝費（¥）</span>
+      <div class="f-input"><input type="number" id="i-ad" value="50000" min="0" oninput="calc()"></div>
     </div>
     <hr>
     <div class="field-row">
@@ -114,15 +115,15 @@ footer{margin-top:2rem;text-align:center;font-size:11px;color:#ccc;letter-spacin
   <div class="sec-label">収益内訳</div>
   <div class="bar-wrap" id="bar"><div class="bar-seg" style="width:14%;background:#B4B2A9"></div><div class="bar-seg" style="width:20%;background:#F0997B"></div><div class="bar-seg" style="width:5%;background:#EF9F27"></div><div class="bar-seg" style="width:13%;background:#85B7EB"></div><div class="bar-seg" style="width:48%;background:#5DCAA5"></div></div>
   <div class="bar-legend" id="bar-legend"><span><span class="dot" style="background:#B4B2A9"></span>原価</span><span><span class="dot" style="background:#F0997B"></span>会場営業料</span><span><span class="dot" style="background:#EF9F27"></span>CC・宣伝費</span><span><span class="dot" style="background:#85B7EB"></span>固定費</span><span><span class="dot" style="background:#5DCAA5"></span>手残り</span></div>
-  <div id="result-rows"><div class="result-row"><span class="rl">売上合計（150個）</span><span class="rv ">¥3,900,000</span></div><div class="result-row"><span class="rl">会場営業料（20%）</span><span class="rv neg">−¥780,000</span></div><div class="result-row"><span class="rl">クレジット手数料（4%）</span><span class="rv neg">−¥156,000</span></div><div class="result-row"><span class="rl">宣伝費（1%）</span><span class="rv neg">−¥39,000</span></div><div class="result-row"><span class="rl">原価</span><span class="rv neg">−¥562,500</span></div><div class="result-row"><span class="rl">スタッフ費</span><span class="rv neg">−¥300,000</span></div><div class="result-row"><span class="rl">什器・固定費</span><span class="rv neg">−¥190,600</span></div><div class="result-row"><span class="rl">手残り</span><span class="rv pos">¥1,871,900</span></div></div>
+  <div id="result-rows"><div class="result-row"><span class="rl">売上合計（150個）</span><span class="rv ">¥3,900,000</span></div><div class="result-row"><span class="rl">会場営業料（20%）</span><span class="rv neg">−¥780,000</span></div><div class="result-row"><span class="rl">クレジット手数料（4%）</span><span class="rv neg">−¥156,000</span></div><div class="result-row"><span class="rl">宣伝費</span><span class="rv neg">−¥50,000</span></div><div class="result-row"><span class="rl">原価</span><span class="rv neg">−¥562,500</span></div><div class="result-row"><span class="rl">スタッフ費</span><span class="rv neg">−¥300,000</span></div><div class="result-row"><span class="rl">什器・固定費</span><span class="rv neg">−¥190,600</span></div><div class="result-row"><span class="rl">手残り</span><span class="rv pos">¥1,860,900</span></div></div>
 </div>
 
 <div class="card">
   <div class="sec-label">損益分岐点</div>
   <div class="grid4" id="bep-cards">
-    <div class="metric"><div class="m-label">分岐点（合計）</div><div class="m-val warn">32個</div></div>
+    <div class="metric"><div class="m-label">分岐点（合計）</div><div class="m-val warn">34個</div></div>
     <div class="metric"><div class="m-label">分岐点（1日）</div><div class="m-val warn">4個/日</div></div>
-    <div class="metric"><div class="m-label">分岐点売上</div><div class="m-val warn">¥832,000</div></div>
+    <div class="metric"><div class="m-label">分岐点売上</div><div class="m-val warn">¥884,000</div></div>
     <div class="metric"><div class="m-label">現在の余裕</div><div class="m-val pos">+11個/日</div></div>
   </div>
 </div>
@@ -138,7 +139,7 @@ function pct(n){return Math.round(n*10)/10+'%'}
 function calc(){
   const price=v('i-price'),cost=v('i-cost'),days=v('i-days');
   const units=parseInt(document.getElementById('i-units').value)||1;
-  const parcoR=v('i-parco')/100,ccR=v('i-cc')/100,adR=v('i-ad')/100;
+  const parcoR=v("i-parco")/100,ccR=v("i-cc")/100;const adFee=v("i-ad");
   const staff=v('i-staff'),fixed=v('i-fixed');
 
   document.getElementById('o-units').textContent=units+'個/日';
@@ -147,7 +148,7 @@ function calc(){
   const rev=totalUnits*price;
   const parcoFee=Math.round(rev*parcoR);
   const ccFee=Math.round(rev*ccR);
-  const adFee=Math.round(rev*adR);
+  
   const cogs=totalUnits*cost;
   const totalCost=parcoFee+ccFee+adFee+cogs+staff+fixed;
   const profit=rev-totalCost;
@@ -164,7 +165,7 @@ function calc(){
     {label:'売上合計（'+totalUnits.toLocaleString()+'個）',val:fmt(rev),cls:''},
     {label:'会場営業料（'+Math.round(v('i-parco'))+'%）',val:'−'+fmt(parcoFee),cls:'neg'},
     {label:'クレジット手数料（'+Math.round(v('i-cc'))+'%）',val:'−'+fmt(ccFee),cls:'neg'},
-    {label:'宣伝費（'+Math.round(v('i-ad'))+'%）',val:'−'+fmt(adFee),cls:'neg'},
+    {label:'宣伝費',val:'−'+fmt(adFee),cls:'neg'},
     {label:'原価',val:'−'+fmt(cogs),cls:'neg'},
     {label:'スタッフ費',val:'−'+fmt(staff),cls:'neg'},
     {label:'什器・固定費',val:'−'+fmt(fixed),cls:'neg'},
@@ -183,8 +184,8 @@ function calc(){
   document.getElementById('bar').innerHTML=segs.map(s=>`<div class="bar-seg" style="width:${Math.round(s.val/total*100)}%;background:${s.color}"></div>`).join('');
   document.getElementById('bar-legend').innerHTML=segs.map(s=>`<span><span class="dot" style="background:${s.color}"></span>${s.label}</span>`).join('');
 
-  const fixedTotal=staff+fixed;
-  const varPerUnit=cost+price*parcoR+price*ccR+price*adR;
+  const fixedTotal=staff+fixed+adFee;
+  const varPerUnit=cost+price*parcoR+price*ccR;
   const contrib=price-varPerUnit;
   const bepTotal=contrib>0?Math.ceil(fixedTotal/contrib):Infinity;
   const bepDay=contrib>0?Math.ceil(bepTotal/days):Infinity;
