@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)file:///Users/nakazawahinako/Downloads/otano-revenue-calculator.html -->
+<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OtanO | 収益計算ページ</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Yu Gothic',sans-serif;background:#f9f7f4;color:#1a1a1a;min-height:100vh;padding:2rem 1rem}
+.wrap{max-width:720px;margin:0 auto}
+.header{margin-bottom:1.75rem}
+.brand{font-size:10px;letter-spacing:0.2em;color:#aaa;text-transform:uppercase;margin-bottom:5px}
+.page-title{font-size:22px;font-weight:400;letter-spacing:0.02em;color:#1a1a1a}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+@media(max-width:540px){.grid2{grid-template-columns:1fr}.grid4{grid-template-columns:repeat(2,1fr)}}
+.card{background:#fff;border:0.5px solid #e8e5e0;border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:10px}
+.metric{background:#f4f2ef;border-radius:8px;padding:0.875rem 1rem}
+.m-label{font-size:11px;color:#999;margin-bottom:4px}
+.m-val{font-size:21px;font-weight:400;letter-spacing:-0.02em;color:#1a1a1a}
+.sec-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#aaa;margin-bottom:12px}
+.field-row{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.field-row:last-child{margin-bottom:0}
+.f-label{font-size:13px;color:#666;min-width:148px;flex-shrink:0}
+.f-input{display:flex;align-items:center;gap:8px;flex:1}
+.f-input input[type=range]{flex:1;accent-color:#1a1a1a;cursor:pointer}
+.f-val{font-size:13px;font-weight:500;min-width:74px;text-align:right;color:#1a1a1a}
+.f-unit{font-size:12px;color:#bbb}
+input[type=number]{width:100px;font-size:13px;padding:5px 8px;border:0.5px solid #d0cdc8;border-radius:6px;background:#fff;color:#1a1a1a;-moz-appearance:textfield}
+input[type=number]::-webkit-inner-spin-button{opacity:0.4}
+input[type=number]:focus{outline:none;border-color:#999}
+hr{border:none;border-top:0.5px solid #f0ede8;margin:12px 0}
+.result-row{display:flex;justify-content:space-between;padding:7px 0;font-size:13px;border-bottom:0.5px solid #f5f3f0}
+.result-row:last-child{border-bottom:none;font-size:15px;font-weight:500;padding-top:11px;margin-top:4px}
+.rl{color:#888}
+.rv{font-weight:500;color:#1a1a1a}
+.pos{color:#0d7a5a}
+.neg{color:#c0392b}
+.warn{color:#a06800}
+.bar-wrap{height:7px;border-radius:4px;background:#f0ede8;overflow:hidden;display:flex;margin:10px 0 8px}
+.bar-seg{height:100%;transition:width 0.25s ease}
+.bar-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11px;color:#888;margin-bottom:1.25rem}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px;vertical-align:middle}
+footer{margin-top:2rem;text-align:center;font-size:11px;color:#ccc;letter-spacing:0.08em;padding-bottom:1rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="header">
+  <div class="brand">OtanO Jewelry</div>
+  <div class="page-title">収益計算ページ</div>
+</div>
+
+<div class="sec-label">サマリー</div>
+<div class="grid4">
+  <div class="metric"><div class="m-label">売上合計</div><div class="m-val" id="s-rev">¥3,900,000</div></div>
+  <div class="metric"><div class="m-label">総コスト</div><div class="m-val" id="s-cost">¥2,028,100</div></div>
+  <div class="metric"><div class="m-label">手残り</div><div class="m-val pos" id="s-profit">¥1,871,900</div></div>
+  <div class="metric"><div class="m-label">利益率</div><div class="m-val" id="s-margin">48%</div></div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="sec-label">販売条件</div>
+    <div class="field-row">
+      <span class="f-label">販売価格（¥/個）</span>
+      <div class="f-input"><input type="number" id="i-price" value="26000" min="0" oninput="calc()"></div>
+    </div>
+    <div class="field-row">
+      <span class="f-label">原価（¥/個）</span>
+      <div class="f-input"><input type="number" id="i-cost" value="3750" min="0" oninput="calc()"></div>
+    </div>
+    <div class="field-row">
+      <span class="f-label">開催日数</span>
+      <div class="f-input"><input type="number" id="i-days" value="10" min="1" max="365" oninput="calc()"></div>
+    </div>
+    <hr>
+    <div class="field-row">
+      <span class="f-label">1日販売個数</span>
+      <div class="f-input">
+        <input type="range" id="i-units" min="1" max="50" value="15" step="1" oninput="calc()">
+        <span class="f-val" id="o-units">15個/日</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sec-label">費用条件</div>
+    <div class="field-row">
+      <span class="f-label">会場営業料（%）</span>
+      <div class="f-input"><input type="number" id="i-parco" value="20" min="0" max="100" oninput="calc()"><span class="f-unit">%</span></div>
+    </div>
+    <div class="field-row">
+      <span class="f-label">クレジット手数料（%）</span>
+      <div class="f-input"><input type="number" id="i-cc" value="4" min="0" max="20" oninput="calc()"><span class="f-unit">%</span></div>
+    </div>
+    <div class="field-row">
+      <span class="f-label">宣伝費（%）</span>
+      <div class="f-input"><input type="number" id="i-ad" value="1" min="0" max="30" oninput="calc()"><span class="f-unit">%</span></div>
+    </div>
+    <hr>
+    <div class="field-row">
+      <span class="f-label">スタッフ費（¥）</span>
+      <div class="f-input"><input type="number" id="i-staff" value="300000" min="0" oninput="calc()"></div>
+    </div>
+    <div class="field-row">
+      <span class="f-label">什器・固定費（¥）</span>
+      <div class="f-input"><input type="number" id="i-fixed" value="190600" min="0" oninput="calc()"></div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="sec-label">収益内訳</div>
+  <div class="bar-wrap" id="bar"><div class="bar-seg" style="width:14%;background:#B4B2A9"></div><div class="bar-seg" style="width:20%;background:#F0997B"></div><div class="bar-seg" style="width:5%;background:#EF9F27"></div><div class="bar-seg" style="width:13%;background:#85B7EB"></div><div class="bar-seg" style="width:48%;background:#5DCAA5"></div></div>
+  <div class="bar-legend" id="bar-legend"><span><span class="dot" style="background:#B4B2A9"></span>原価</span><span><span class="dot" style="background:#F0997B"></span>会場営業料</span><span><span class="dot" style="background:#EF9F27"></span>CC・宣伝費</span><span><span class="dot" style="background:#85B7EB"></span>固定費</span><span><span class="dot" style="background:#5DCAA5"></span>手残り</span></div>
+  <div id="result-rows"><div class="result-row"><span class="rl">売上合計（150個）</span><span class="rv ">¥3,900,000</span></div><div class="result-row"><span class="rl">会場営業料（20%）</span><span class="rv neg">−¥780,000</span></div><div class="result-row"><span class="rl">クレジット手数料（4%）</span><span class="rv neg">−¥156,000</span></div><div class="result-row"><span class="rl">宣伝費（1%）</span><span class="rv neg">−¥39,000</span></div><div class="result-row"><span class="rl">原価</span><span class="rv neg">−¥562,500</span></div><div class="result-row"><span class="rl">スタッフ費</span><span class="rv neg">−¥300,000</span></div><div class="result-row"><span class="rl">什器・固定費</span><span class="rv neg">−¥190,600</span></div><div class="result-row"><span class="rl">手残り</span><span class="rv pos">¥1,871,900</span></div></div>
+</div>
+
+<div class="card">
+  <div class="sec-label">損益分岐点</div>
+  <div class="grid4" id="bep-cards">
+    <div class="metric"><div class="m-label">分岐点（合計）</div><div class="m-val warn">32個</div></div>
+    <div class="metric"><div class="m-label">分岐点（1日）</div><div class="m-val warn">4個/日</div></div>
+    <div class="metric"><div class="m-label">分岐点売上</div><div class="m-val warn">¥832,000</div></div>
+    <div class="metric"><div class="m-label">現在の余裕</div><div class="m-val pos">+11個/日</div></div>
+  </div>
+</div>
+
+<footer>OtanO Jewelry · Revenue Calculator</footer>
+</div>
+
+<script>
+function v(id){return parseFloat(document.getElementById(id).value)||0}
+function fmt(n){return '¥'+Math.round(n).toLocaleString()}
+function pct(n){return Math.round(n*10)/10+'%'}
+
+function calc(){
+  const price=v('i-price'),cost=v('i-cost'),days=v('i-days');
+  const units=parseInt(document.getElementById('i-units').value)||1;
+  const parcoR=v('i-parco')/100,ccR=v('i-cc')/100,adR=v('i-ad')/100;
+  const staff=v('i-staff'),fixed=v('i-fixed');
+
+  document.getElementById('o-units').textContent=units+'個/日';
+
+  const totalUnits=units*days;
+  const rev=totalUnits*price;
+  const parcoFee=Math.round(rev*parcoR);
+  const ccFee=Math.round(rev*ccR);
+  const adFee=Math.round(rev*adR);
+  const cogs=totalUnits*cost;
+  const totalCost=parcoFee+ccFee+adFee+cogs+staff+fixed;
+  const profit=rev-totalCost;
+  const margin=rev>0?((profit/rev)*100):0;
+
+  document.getElementById('s-rev').textContent=fmt(rev);
+  document.getElementById('s-cost').textContent=fmt(totalCost);
+  const sp=document.getElementById('s-profit');
+  sp.textContent=fmt(profit);
+  sp.className='m-val '+(profit>=0?'pos':'neg');
+  document.getElementById('s-margin').textContent=pct(margin);
+
+  const rows=[
+    {label:'売上合計（'+totalUnits.toLocaleString()+'個）',val:fmt(rev),cls:''},
+    {label:'会場営業料（'+Math.round(v('i-parco'))+'%）',val:'−'+fmt(parcoFee),cls:'neg'},
+    {label:'クレジット手数料（'+Math.round(v('i-cc'))+'%）',val:'−'+fmt(ccFee),cls:'neg'},
+    {label:'宣伝費（'+Math.round(v('i-ad'))+'%）',val:'−'+fmt(adFee),cls:'neg'},
+    {label:'原価',val:'−'+fmt(cogs),cls:'neg'},
+    {label:'スタッフ費',val:'−'+fmt(staff),cls:'neg'},
+    {label:'什器・固定費',val:'−'+fmt(fixed),cls:'neg'},
+    {label:'手残り',val:fmt(profit),cls:profit>=0?'pos':'neg'},
+  ];
+  document.getElementById('result-rows').innerHTML=rows.map(r=>`<div class="result-row"><span class="rl">${r.label}</span><span class="rv ${r.cls}">${r.val}</span></div>`).join('');
+
+  const segs=[
+    {label:'原価',val:cogs,color:'#B4B2A9'},
+    {label:'会場営業料',val:parcoFee,color:'#F0997B'},
+    {label:'CC・宣伝費',val:ccFee+adFee,color:'#EF9F27'},
+    {label:'固定費',val:staff+fixed,color:'#85B7EB'},
+    {label:'手残り',val:Math.max(profit,0),color:'#5DCAA5'},
+  ];
+  const total=segs.reduce((a,s)=>a+s.val,0)||1;
+  document.getElementById('bar').innerHTML=segs.map(s=>`<div class="bar-seg" style="width:${Math.round(s.val/total*100)}%;background:${s.color}"></div>`).join('');
+  document.getElementById('bar-legend').innerHTML=segs.map(s=>`<span><span class="dot" style="background:${s.color}"></span>${s.label}</span>`).join('');
+
+  const fixedTotal=staff+fixed;
+  const varPerUnit=cost+price*parcoR+price*ccR+price*adR;
+  const contrib=price-varPerUnit;
+  const bepTotal=contrib>0?Math.ceil(fixedTotal/contrib):Infinity;
+  const bepDay=contrib>0?Math.ceil(bepTotal/days):Infinity;
+  const bepRev=bepTotal*price;
+  const surplus=units-(bepDay===Infinity?0:bepDay);
+
+  document.getElementById('bep-cards').innerHTML=`
+    <div class="metric"><div class="m-label">分岐点（合計）</div><div class="m-val warn">${bepTotal===Infinity?'—':bepTotal.toLocaleString()+'個'}</div></div>
+    <div class="metric"><div class="m-label">分岐点（1日）</div><div class="m-val warn">${bepDay===Infinity?'—':bepDay+'個/日'}</div></div>
+    <div class="metric"><div class="m-label">分岐点売上</div><div class="m-val warn">${bepTotal===Infinity?'—':fmt(bepRev)}</div></div>
+    <div class="metric"><div class="m-label">現在の余裕</div><div class="m-val ${surplus>=0?'pos':'neg'}">${bepDay===Infinity?'—':(surplus>=0?'+':'')+surplus+'個/日'}</div></div>
+  `;
+}
+
+calc();
+</script>
+
+
+</body></html>
